@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>DessertShop - Prémium Cukrászda</title>
+    <link rel="stylesheet" href="./css/react.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+</head>
+<body>
+ <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">DESSERT<span>SHOP</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" >Főoldal</a></li>
+                <li><a href="javascript.html" >JS menü</a></li>
+                <li><a href="react.html" class="nav-active">React menü</a></li>
+                <li><a href="spa.html">SPA</a></li>
+                <li><a href="fetchapi.html">FETCHAPI</a></li>
+                <li><a href="axios.html">Axios</a></li>
+                <li><a href="OOJS.html">OOJS</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="admin-header">
+        <h1>DESSERT <span style=" color: var(--red)">SHOP</span> –  Dashboard</h1>
+        <p> A sütemények kezeléséhez</p>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function TravelManager() {
+
+          const productTypes = {
+            Torta: {
+              img: "./img/citrom-torta.avif"
+                  },
+            Sóssütemény: {
+              img: "./img/bakery.avif"
+                   },
+            Krémes: {
+               img: "./img/french-pastry.avif"
+    }
+};
+           
+            const [items, setItems] = useState([
+                { id: 1, name: "Citrom torta", price: 3500, type: "Torta", img: "./img/citrom-torta.avif" },
+                { id: 2, name: "Juhtúrós párna", price: 1400, type: "Sóssütemény", img: "./img/bakery.avif" },
+                { id: 3, name: "Franciakrémes", price: 3200, type: "Krémes", img: "./img/french-pastry.avif" }
+            ]);
+
+            const [newName, setNewName] = useState("");
+            const [newPrice, setNewPrice] = useState("");
+            const [newType, setNewType] = useState("Torta");
+
+            
+            const totalValue = items.reduce((sum, item) => sum + item.price, 0);
+            const averagePrice = items.length > 0 ? Math.round(totalValue / items.length) : 0;
+
+            
+            const handleAdd = () => {
+                if(!newName || !newPrice) return alert("Minden mezőt töltsön ki!");
+                const newItem = {
+                    id: Date.now(),
+                    name: newName,
+                    price: parseInt(newPrice),
+                    type: newType,
+                    img: productTypes[newType].img
+                };
+                setItems([...items, newItem]);
+                setNewName(""); setNewPrice("");
+            };
+
+            
+            const handleDelete = (id) => {
+                if(confirm("Biztosan törli ezt a terméket?")) {
+                    setItems(items.filter(item => item.id !== id));
+                }
+            };
+
+            return (
+                <div className="dashboard-container">
+                    {/* Statisztikai sáv */}
+                    <div className="stats-grid">
+                        <div className="stat-card">
+                            <h4>Aktív ajánlatok</h4>
+                            <p>{items.length} db</p>
+                        </div>
+                        <div className="stat-card">
+                            <h4>Össz érték</h4>
+                            <p>{totalValue.toLocaleString()} Ft</p>
+                        </div>
+                        <div className="stat-card">
+                            <h4>Átlagos ár</h4>
+                            <p>{averagePrice.toLocaleString()} Ft</p>
+                        </div>
+                    </div>
+
+                    {/* Hozzáadás panel */}
+                    <div className="add-panel">
+                        <input type="text" placeholder="Ajánlat termék" value={newName} onChange={e => setNewName(e.target.value)} />
+                        <input type="number" placeholder="Ár (Ft)" value={newPrice} onChange={e => setNewPrice(e.target.value)} />
+                        <select value={newType} onChange={e => setNewType(e.target.value)}>
+                            <option>Torta</option>
+                            <option>Sóssütemény</option>
+                            <option>Krémes</option>
+                            
+                        </select>
+                        <button className="add-btn" onClick={handleAdd}>Ajánlat létrehozása</button>
+                    </div>
+
+                    {/* Kártyák megjelenítése */}
+                    <div className="travel-grid">
+                        {items.map(item => (
+                            <div key={item.id} className="travel-card">
+                                <img src={item.img} alt={item.name} />
+                                <div className="card-body">
+                                    <span className="status-badge status-active">{item.type}</span>
+                                    <h3>{item.name}</h3>
+                                    <div className="price-tag">{item.price.toLocaleString()} Ft</div>
+                                    <button className="del-btn" onClick={() => handleDelete(item.id)}>Ajánlat eltávolítása</button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    <div style={{textAlign: 'center', marginTop: '40px'}}>
+                        <a href="index.html" style={{textDecoration: 'none', color: 'var(--rose-900)', fontWeight: 'bold'}}>← Vissza a főoldalra</a>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<TravelManager />);
+    </script>
+
+    
+</body>
+</html>
