@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desserts Store</title>
+    <link rel="stylesheet" href="./css/fetchapi.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="#">DESSERT<span>SHOP</span></a></div>
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="text" id="product-search" placeholder="Keresés..." onkeyup="filterDesserts()">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <ul class="nav-links">
+                <li><a href="index.html" >Főoldal</a></li>
+                <li><a href="javascript.html">JS menü</a></li>
+                <li><a href="react.html">React menü</a></li>
+                <li><a href="spa.html">SPA</a></li>
+                <li><a href="fetchapi.html" class="nav-active">FETCHAPI</a></li>
+                <li><a href="axios.html">Axios</a></li>
+                <li><a href="OOJS.html">OOJS</a></li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="app-container">
+        <section class="products-column">
+            <h1 class="main-title">Desserts</h1>
+            <div class="product-grid">
+                <article class="product-card">
+                    <div class="image-wrapper">
+                        <img src="https://plus.unsplash.com/premium_photo-1664478254358-fb8ce668dca6?q=80&w=991&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Waffle with Berries" class="product-image">
+                        <button class="add-to-cart-btn" onclick="addToCart(99, 'Minta Süti', 1500)">
+                            <img src="icon-add-to-cart.svg" alt="" class="cart-svg"> Kosárba
+                        </button>
+                    </div>
+                    <p class="category">Waffle</p>
+                    <h2 class="item-name">Waffle with Berries</h2>
+                    <p class="price">6.50</p>
+                </article>
+                <article class="product-card">
+                    <div class="image-wrapper">
+                        <img src="https://plus.unsplash.com/premium_photo-1664478254358-fb8ce668dca6?q=80&w=991&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Waffle with Berries" class="product-image">
+                        <button class="add-to-cart-btn" onclick="addToCart(992, 'Minta Scdxüti', 13500)">
+                            <img src="icon-add-to-cart.svg" alt="" class="cart-svg"> Kosárba
+                        </button>
+                    </div>
+                    <p class="category">Waffle</p>
+                    <h2 class="item-name">berr</h2>
+                    <p class="price">6.50</p>
+                </article>
+                </div>
+        </section>
+
+        <aside class="cart-card">
+            <h3 class="cart-title">Kosarad (0)</h3>
+            <div class="cart-empty-state">
+                <p>A kosarad jelenleg üres</p>
+            </div>
+        </aside>
+    </main>
+
+    <script src="./script/fetchapi.js"></script>
+</body>
+</html>
