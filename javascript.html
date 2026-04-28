@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="hu">
+<html>
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DessertShop - Prémium Cukrászda</title>
+    <link rel="stylesheet" href="./css/javascript.css">
+</head>
+<body>
+  <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">DESSERT<span>SHOP</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" >Főoldal</a></li>
+                <li><a href="javascript.html" class="nav-active">JS menü</a></li>
+                <li><a href="react.html">React menü</a></li>
+                <li><a href="spa.html">SPA</a></li>
+                <li><a href="fetchapi.html">FETCHAPI</a></li>
+                <li><a href="axios.html">Axios</a></li>
+                <li><a href="OOJS.html">OOJS</a></li>
+            </ul>
+        </div>
+    </nav>
+	<h1><center>JavaScript CRUD example</center></h1>
+	<hr>
+	<div class="employee-form">
+		<form onsubmit="event.preventDefault();onFormSubmit();">
+			<div>
+				<label>Sütemény név</label><label class="validation-error hide" id="SüteményValidationError">This field is required.</label>
+				<input type="text" name="SüteményNév" id="SüteményNév">
+			</div>
+			<div>
+				<label>Sütemény Típus</label>
+				<input type="text" name="SüteményTípus" id="SüteményTípus">
+			</div>
+			<div>
+				<label>ÁR</label>
+				<input type="text" name="ÁR" id="ÁR">
+			</div>
+			
+			<div  class="form-action-buttons">
+				<input type="submit" value="Submit">
+			</div>
+		</form>
+	</div>
+	<br/>
+	<div class = "employees-table">
+		<table class="list" id="employeeList">
+			<thead>
+				<tr>
+					<th>Sütemény név</th>
+					<th>Típus</th>
+					<th>Ár</th>
+					
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+	</div>
+    <script src="./script/javascript.js"></script>
+</body>
+</html>
