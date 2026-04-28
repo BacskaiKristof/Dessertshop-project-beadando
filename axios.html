@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DESSERTShop - Admin</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <link rel="stylesheet" href="./css/axios.css">
+    
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">DESSERT<span>SHOP</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" >Főoldal</a></li>
+                <li><a href="javascript.html" >JS menü</a></li>
+                <li><a href="react.html">React menü</a></li>
+                <li><a href="spa.html">SPA</a></li>
+                <li><a href="fetchapi.html">FETCHAPI</a></li>
+                <li><a href="axios.html" class="nav-active">Axios</a></li>
+                <li><a href="OOJS.html">OOJS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="react-admin-root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const OrderManager = () => {
+            const [orders, setOrders] = useState([]);
+            const [loading, setLoading] = useState(true);
+            const API_PATH = 'php/';
+
+            // 1. READ - Rendelések lekérése
+            const fetchOrders = async () => {
+                try {
+                    const res = await axios.get(API_PATH + 'get_orders.php');
+                    setOrders(res.data);
+                    setLoading(false);
+                } catch (err) {
+                    console.error("Hiba az adatok lekérésekor", err);
+                    setLoading(false);
+                }
+            };
+
+            useEffect(() => {
+                fetchOrders();
+            }, []);
+
+            // 2. UPDATE - Státusz frissítése
+            const updateStatus = async (id, newStatus) => {
+                try {
+                    const res = await axios.post(API_PATH + 'update_status.php', {
+                        id: id,
+                        statusz: newStatus
+                    });
+                    if(res.data.success) fetchOrders();
+                } catch (err) {
+                    alert("Hiba történt a frissítés során!");
+                }
+            };
+
+            // 3. DELETE - Törlés
+            const deleteOrder = async (id) => {
+                if(window.confirm("Biztosan törölni szeretnéd ezt a rendelést?")) {
+                    try {
+                        const res = await axios.post(API_PATH + 'delete_order.php', { id: id });
+                        if(res.data.success) fetchOrders();
+                    } catch (err) {
+                        alert("Hiba a törlésnél!");
+                    }
+                }
+            };
+
+            if (loading) return <div className="loader">Rendelések töltése...</div>;
+
+            return (
+                <main className="admin-main">
+                    <h2>Rendelések kezelése</h2>
+                    <table className="order-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Dátum</th>
+                                <th>Termékek</th>
+                                <th>Végösszeg</th>
+                                <th>Státusz</th>
+                                <th>Művelet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {orders.length === 0 ? (
+                                <tr><td colSpan="6" style={{textAlign:'center'}}>Nincs még rendelés az adatbázisban.</td></tr>
+                            ) : (
+                                orders.map(order => (
+                                    <tr key={order.id}>
+                                        <td>#{order.id}</td>
+                                        <td>{order.datum}</td>
+                                        <td>
+                                            <ul className="items-list">
+                                                {order.items.map((item, idx) => (
+                                                    <li key={idx}>{item.suti_nev} - {item.mennyiseg} db</li>
+                                                ))}
+                                            </ul>
+                                        </td>
+                                        <td><strong>{order.osszertek} Ft</strong></td>
+                                        <td>
+                                            <select 
+                                                className="status-select"
+                                                value={order.statusz} 
+                                                onChange={(e) => updateStatus(order.id, e.target.value)}
+                                            >
+                                                <option value="Feldolgozás alatt">Feldolgozás alatt</option>
+                                                <option value="Készítés alatt">Készítés alatt</option>
+                                                <option value="Kiszállítás alatt">Kiszállítás alatt</option>
+                                                <option value="Teljesítve">Teljesítve</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button className="btn-delete" onClick={() => deleteOrder(order.id)}>Törlés</button>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </main>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('react-admin-root'));
+        root.render(<OrderManager />);
+    </script>
+</body>
+</html>
