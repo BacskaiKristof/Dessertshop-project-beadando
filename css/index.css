@@ -1,0 +1,269 @@
+:root {
+    --red: #c73b0f;
+    --rose-900: #260f08;
+    --rose-500: #87635a;
+    --rose-400: #ad8a85;
+    --rose-100: #f5eeec;
+    --rose-50: #fcf8f5;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+}
+
+body {
+    box-sizing: border-box;
+       
+    font-family: 'Red Hat Text', sans-serif;
+    background-color: var(--rose-50);
+    color: var(--rose-900);
+    /*padding: 24px;*/
+}
+
+/* Main Layout */
+.app-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+  width: auto;
+    padding-top: 40px
+}
+
+@media (min-width: 1024px) {
+    .app-container {
+        grid-template-columns: 1fr 350px; /* Main content + Sidebar */
+        align-items: start;
+    }
+}
+
+.main-title {
+    font-size: 40px;
+    
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid var(--rose-100);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 10px 0;
+    width: 100%; /* Ensures it fills the width */
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.nav-logo a {
+    font-size: 24px;
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--rose-900);
+}
+
+.nav-logo span {
+    color: var(--red);
+}
+
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--rose-500);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--red);
+}
+.nav-links .nav-active{
+   color: var(--red);
+}
+
+
+/* HERO */
+.hero {
+    position: relative; 
+    height: 100vh;
+    background: url('../img/hero-img.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    overflow: hidden; 
+    
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1;
+}
+
+.hero * {
+    position: relative;
+    z-index: 2;
+}
+
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem; /* ez adja a távolságot */
+}
+
+.hero-text h2 {
+    font-size: 4rem;
+    padding: 1rem;
+}
+
+.hero-text p {
+    font-size: 2rem;
+}
+
+.hero-text .rendeles {
+    padding: 10px 20px;
+    border: 1px solid white;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    
+}
+.hero-text .rendeles:hover{
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+
+/* PRODUCTS */
+.products {
+    padding: 50px;
+    text-align: center;
+}
+.products h2{
+  font-size: 3rem;
+}
+.card-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.card {
+    background: var(--secondary);
+    padding: 15px;
+    border-radius: 10px;
+    width: 250px;
+    overflow: hidden; 
+}
+
+.card img {
+    width: 100%;
+    height: 180px; 
+    object-fit: cover; 
+    border-radius: 10px;
+}
+
+.card h3 {
+   padding: 1rem;
+}
+
+
+/* ABOUT */
+.about {
+    padding: 50px;
+    background: #fafafa;
+    text-align: center;
+}
+
+.about h2{
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.about p{
+  font-size: 1.5rem;
+  padding: 0.5rem 0rem;
+}
+
+/* CONTACT */
+.contact {
+    padding: 50px;
+    text-align: center;
+}
+.contact h2{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.contact p{
+  padding: 0.5rem 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+.site-footer {
+    
+    height: 15vh;
+   color: var(--rose-900);
+    background-color: #b9b8b8;
+}
+.site-footer p{
+  padding: 1rem;
+}
+.site-footer a{
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  padding: 0.3rem 0.4rem 0rem 0.4rem;
+  text-decoration: none;
+  color: var(--red);
+  border: 1px solid red;
+  border-radius: 50%;
+}
+.site-footer a:hover{
+  color: #fff;
+  border: solid 1px #fff;
+}

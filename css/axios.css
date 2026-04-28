@@ -1,0 +1,86 @@
+:root {
+    --red: #c73b0f;
+    --rose-900: #260f08;
+    --rose-500: #87635a;
+    --rose-400: #ad8a85;
+    --rose-100: #f5eeec;
+    --rose-50: #fcf8f5;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+body { background-color: var(--rose-50); color: var(--rose-900); }
+
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid var(--rose-100);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 10px 0;
+    width: 100%; 
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.nav-logo a {
+    font-size: 24px;
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--rose-900);
+}
+
+.nav-logo span {
+    color: var(--red);
+}
+
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--rose-500);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--red);
+}
+.nav-links .nav-active{
+   color: var(--red);
+}
+
+        .admin-main { max-width: 1100px; margin: 40px auto; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .order-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .order-table th, .order-table td { padding: 12px; border-bottom: 1px solid var(--rose-100); text-align: left; }
+        .order-table th { background-color: var(--rose-50); color: var(--red); font-weight: 700; }
+        
+        .status-badge { padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; border: none; cursor: pointer; }
+        .status-select { padding: 5px; border-radius: 4px; border: 1px solid var(--rose-400); }
+        
+        .btn-delete { background-color: #ff4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
+        .btn-delete:hover { background-color: #cc0000; }
+        
+        .items-list { font-size: 0.9em; color: var(--rose-500); list-style: none; padding: 0; }
+        .loader { text-align: center; padding: 50px; font-weight: bold; color: var(--red); }
+    

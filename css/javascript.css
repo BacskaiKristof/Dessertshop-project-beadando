@@ -1,0 +1,183 @@
+:root {
+    --red: #c73b0f;
+    --rose-900: #260f08;
+    --rose-500: #87635a;
+    --rose-400: #ad8a85;
+    --rose-100: #f5eeec;
+    --rose-50: #fcf8f5;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+}
+
+body {
+    box-sizing: border-box;
+       
+    font-family: 'Red Hat Text', sans-serif;
+    background-color: var(--rose-50);
+    color: var(--rose-900);
+    /*padding: 24px;*/
+    
+}
+
+
+
+
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid var(--rose-100);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 10px 0;
+    width: 100%; 
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.nav-logo a {
+    font-size: 24px;
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--rose-900);
+}
+
+.nav-logo span {
+    color: var(--red);
+}
+
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--rose-500);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--red);
+}
+.nav-links .nav-active{
+   color: var(--red);
+}
+
+
+
+.employee-form {
+    
+    border: 0.5rem solid var(--rose-500);
+    /* margin-bottom: 10px; */
+    /* margin-left: 10px; */
+    padding: 10px;
+    /* width: 50%; */
+    margin: 2rem auto;
+    width: 50%;
+    /* border: 3px solid green; */
+    /* padding: 10px; */
+}
+.employee-table {
+    border-style: solid;
+    /* margin-bottom: 10px; */
+    /* margin-left: 10px; */
+    padding: 20px;
+    /* width: 50%; */
+    margin: auto;
+    width: 70%;
+    /* border: 3px solid green; */
+    /* padding: 10px; */
+}
+body > table{
+    width: 80%;
+}
+table{
+    border-collapse: collapse;
+}
+table .edit{
+  text-decoration: none;
+  background: blue;
+  color: #fff;
+  padding: 0.3rem;
+  border-radius: 4px;
+}
+table .del{
+text-decoration: none;
+  background: red;
+  color: #fff;
+  padding: 0.3rem;
+  border-radius: 4px;
+}
+table.list{
+    width:100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even),table.list thead>tr {
+    background-color: #dddddd;
+}
+input[type=text], input[type=number] {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=submit] {
+    width: 30%;
+    background-color: var(--rose-900);
+    color: white;
+    padding: 10px 18px;
+    /* margin: 0px 0; */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+input[type=submit]:hover{
+  background-color: var(--rose-500);
+}
+form div.form-action-buttons{
+    text-align: right;
+}
+a{
+    cursor: pointer;
+    text-decoration: underline;
+    color: #0000ee;
+    margin-right: 4px;
+}
+label.validation-error{
+    color:   red;
+    margin-left: 5px;
+}
+.hide{
+    display:none;
+}

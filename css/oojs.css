@@ -1,0 +1,98 @@
+
+        body {
+            overflow: hidden; 
+            background-color: var(--rose-50);
+            --red: #c73b0f;
+    --rose-900: #260f08;
+    --rose-500: #87635a;
+    --rose-400: #ad8a85;
+    --rose-100: #f5eeec;
+    --rose-50: #fcf8f5;
+   
+        }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        .navbar {
+    background-color: white;
+    border-bottom: 1px solid var(--rose-100);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 10px 0;
+    width: 100%; 
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.nav-logo a {
+    font-size: 24px;
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--rose-900);
+}
+
+.nav-logo span {
+    color: var(--red);
+}
+
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--rose-500);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--red);
+}
+.nav-links .nav-active{
+   color: var(--red);
+}
+        .canvas-area {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        .dessert-sprite {
+            position: absolute;
+            font-size: 40px;
+            user-select: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .dessert-sprite:hover {
+            transform: scale(1.5);
+        }
+        .controls {
+            position: absolute;
+            top: 100px;
+            left: 20px;
+            z-index: 10;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+    
