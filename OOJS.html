@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOJS - Pattogó Sütik</title>
+    <link rel="stylesheet" href="./css/oojs.css">
+    
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">DESSERT<span>SHOP</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" >Főoldal</a></li>
+                <li><a href="javascript.html" >JS menü</a></li>
+                <li><a href="react.html">React menü</a></li>
+                <li><a href="spa.html">SPA</a></li>
+                <li><a href="fetchapi.html">FETCHAPI</a></li>
+                <li><a href="axios.html" >Axios</a></li>
+                <li><a href="OOJS.html" class="nav-active">OOJS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="controls">
+        <h3>Süti Generátor</h3>
+        <p>Kattints a gombra, vagy a képernyőre!</p>
+        <button class="confirm-order-btn" id="add-dessert">Új Süti hozzáadása</button>
+    </div>
+
+    <div class="canvas-area" id="canvas"></div>
+
+    <script>
+      
+        class GraphicElement {
+            constructor(symbol) {
+               
+                this.element = document.createElement('div');
+                this.element.className = 'dessert-sprite';
+                this.element.innerText = symbol;
+                
+                
+                document.getElementById('canvas').appendChild(this.element);
+            }
+
+          
+            setPosition(x, y) {
+                this.element.style.left = x + 'px';
+                this.element.style.top = y + 'px';
+            }
+        }
+
+       
+        class BouncingDessert extends GraphicElement {
+            constructor(symbol, x, y) {
+               
+                super(symbol); 
+                
+                this.x = x;
+                this.y = y;
+                
+                this.speedX = (Math.random() - 0.5) * 10;
+                this.speedY = (Math.random() - 0.5) * 10;
+                
+                this.update();
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x <= 0 || this.x >= window.innerWidth - 50) {
+                    this.speedX *= -1;
+                }
+                if (this.y <= 0 || this.y >= window.innerHeight - 50) {
+                    this.speedY *= -1;
+                }
+
+               
+                this.setPosition(this.x, this.y);
+
+               
+                requestAnimationFrame(() => this.update());
+            }
+        }
+
+        
+        const emojis = ['🍰', '🍩', '🧁', '🍦', '🍪', '🧇'];
+        const canvas = document.getElementById('canvas');
+
+        function createRandomDessert() {
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            const startX = Math.random() * (window.innerWidth - 50);
+            const startY = Math.random() * (window.innerHeight - 50);
+            
+           
+            new BouncingDessert(randomEmoji, startX, startY);
+        }
+
+       
+        document.getElementById('add-dessert').addEventListener('click', createRandomDessert);
+
+       
+        canvas.addEventListener('click', (e) => {
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            new BouncingDessert(randomEmoji, e.clientX, e.clientY);
+        });
+
+       
+        for(let i = 0; i < 5; i++) {
+            createRandomDessert();
+        }
+    </script>
+</body>
+</html>
