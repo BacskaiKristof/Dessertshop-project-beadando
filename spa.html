@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>DESSERTSHOP - Játékok</title>
+    <link rel="stylesheet" href="./css/spa.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+</head>
+<body class="spa-page">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+
+
+        // --- 1. JÁTÉK: SZERENCSEKERÉK (A kódod változtatás nélkül) ---
+        const FortuneClicker = () => {
+            const [score, setScore] = useState(0);
+            const [timeLeft, setTimeLeft] = useState(8);
+            const [isActive, setIsActive] = useState(false);
+
+            useEffect(() => {
+                let timer;
+                if (isActive && timeLeft > 0) {
+                    timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
+                } else if (timeLeft === 0) {
+                    setIsActive(false);
+                    clearInterval(timer);
+                }
+                return () => clearInterval(timer);
+            }, [isActive, timeLeft]);
+
+            const startGame = () => {
+                setScore(0);
+                setTimeLeft(8);
+                setIsActive(true);
+            };
+            
+
+            return (
+                <div className="app-container">
+                    <h2>Cookie Clicker</h2>
+                    <div className="game-box">
+                    
+                    <p>Süss annyi sütit 8 másodperc alatt, amennyit csak tudsz!</p>
+                    
+                    <div className="stats">
+                        <span>Idő: {timeLeft}s</span>
+                        <span>Pontszám: {score}</span>
+                    </div>
+
+                    {timeLeft > 0 ? (
+                        <button 
+                            className="cookie-target" 
+                            onClick={() => isActive && setScore(score + 1)}
+                            disabled={!isActive}
+                        >
+                            🍪
+                        </button>
+                    ) : (
+                        <div className="result">
+                            <h3>Vége! Eredményed: {score} süti</h3>
+                        </div>
+                    )}
+
+                    {!isActive && (
+                        <button className="action-btn" onClick={startGame}>
+                            {timeLeft === 8 ? 'Indítás' : 'Új játék'}
+                        </button>
+                    )}
+                </div>
+                    
+                </div>
+            );
+        };
+
+        // --- 2. JÁTÉK: ÚTI CÉL MEMÓRIA (Új SPA modul) ---
+        const MemoryGame = () => {
+            const icons = ['🍰', '🧁', '🍩', '🍪', '🥐', '🥨', '🥧', '🍮','🍰', '🧁', '🍩', '🍪', '🥐', '🥨', '🥧', '🍮'];
+            const [cards, setCards] = useState([]);
+            const [flipped, setFlipped] = useState([]);
+            const [solved, setSolved] = useState([]);
+
+            useEffect(() => {
+                setCards(icons.sort(() => Math.random() - 0.5));
+            }, []);
+
+            const handleFlip = (i) => {
+                if (flipped.length === 2 || flipped.includes(i) || solved.includes(i)) return;
+                const newFlipped = [...flipped, i];
+                setFlipped(newFlipped);
+                if (newFlipped.length === 2) {
+                    if (cards[newFlipped[0]] === cards[newFlipped[1]]) {
+                        setSolved([...solved, ...newFlipped]);
+                        setFlipped([]);
+                    } else {
+                        setTimeout(() => setFlipped([]), 800);
+                    }
+                }
+            };
+
+            return (
+                <div className="app-container">
+                    <h2>Sütemény párosító</h2>
+                    <p>Találja meg a sütemények párjait!</p>
+                    <div className="memory-grid">
+                        {cards.map((icon, i) => (
+                            <div key={i} className={`memory-card ${flipped.includes(i) || solved.includes(i) ? 'flipped' : ''}`} onClick={() => handleFlip(i)}>
+                                {(flipped.includes(i) || solved.includes(i)) ? icon : '?'}
+                            </div>
+                        ))}
+                    </div>
+                    {solved.length === icons.length && <div className="win-box">Gratulálunk! Minden pár meglett!</div>}
+                    <button className="action-btn" onClick={() => window.location.reload()}>Új játék</button>
+                </div>
+            );
+        };
+
+        // --- FŐ SPA VEZÉRLŐ ---
+        const App = () => {
+            const [activeGame, setActiveGame] = useState('Clicker');
+
+            return (
+                <>
+                <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">DESSERT<span>SHOP</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" >Főoldal</a></li>
+                <li><a href="javascript.html" >JS menü</a></li>
+                <li><a href="react.html">React menü</a></li>
+                <li><a href="spa.html" class="nav-active">SPA</a></li>
+                <li><a href="fetchapi.html">FETCHAPI</a></li>
+                <li><a href="axios.html">Axios</a></li>
+                <li><a href="OOJS.html">OOJS</a></li>
+            </ul>
+        </div>
+    </nav>
+                <div>
+                    <nav className="spa-nav">
+                        <button className={activeGame === 'Clicker' ? 'active' : ''} onClick={() => setActiveGame('Clicker')}>Cookie Clicker</button>
+                        <button className={activeGame === 'memory' ? 'active' : ''} onClick={() => setActiveGame('memory')}>Memória Játék</button>
+                        <a href="index.html" style={{color:'white', marginLeft:'20px', textDecoration:'none'}}>← Főoldal</a>
+                    </nav>
+                    {activeGame === 'Clicker' ? <FortuneClicker /> : <MemoryGame />}
+                    
+                </div>
+                </>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
